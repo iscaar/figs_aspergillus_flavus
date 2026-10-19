@@ -1,11 +1,59 @@
 \chapter{Marco Teórico}
 
-Las Imágenes Hiperespectrales (HSI) constituyen una tecnología revolucionaria que, a diferencia de la visión artificial convencional, captura información espectral detallada a lo largo de cientos de bandas contiguas para cada píxel \cite{wang_review_2021, chu_classifying_2020}. Esto permite la detección de cambios fisicoquímicos sutiles en los tejidos vegetales antes de que los síntomas sean visibles para el ojo humano \cite{wang_review_2021, chu_classifying_2020}. Sin embargo, la alta correlación entre bandas contiguas genera redundancia y desencadena el fenómeno de Hughes, o maldición de la dimensionalidad, donde la precisión de clasificación disminuye a medida que aumenta el número de bandas para un número limitado de muestras \cite{hughes_mean_1968, sawant_survey_2020}.
+\section{Imagen Digital}
+Una imagen digital se define formalmente como una función bidimensional de intensidad, $f(x, y)$, en la cual $x$ e $y$ representan las coordenadas espaciales, mientras que el valor de la amplitud $f$ en cada punto corresponde al nivel de gris o brillo. Cuando las coordenadas espaciales $(x, y)$ y los valores de intensidad son finitos y discretos, la función se clasifica adecuadamente como una imagen digital\cite{gonzalez_digital_2018}.
 
-Para resolver este problema, la selección de bandas es una estrategia efectiva que elimina la redundancia preservando las características discriminatorias \cite{sawant_survey_2020}. En este contexto destacan los enfoques metaheurísticos:
+\subsection{Imagen Digital Monocromática}
+La luz monocromática (o acromática) se refiere a la radiación lumínica completamente desprovista de color. Su único atributo cuantitativo es la intensidad, cuyos valores abarcan desde el negro hasta el blanco a lo largo de la escala de grises; consecuentemente, a las imágenes monocromáticas se las denomina de manera habitual imágenes en escala de grises\cite{gonzalez_digital_2018}.
+
+\subsection{Imagen Digital RGB}
+El modelo de color RGB se fundamenta en un sistema de coordenadas cartesianas donde los colores se representan a través de sus componentes espectrales primarias: rojo, verde y azul. En consecuencia, una imagen estructurada bajo este modelo consta de tres canales de imagen independientes, correspondientes a cada una de dichas componentes primarias\cite{gonzalez_digital_2018}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{RGB _cube_spanish.jpeg}
+    \caption{Esquema del cubo de color RGB. Los puntos sobre la diagonal principal tienen valores de la escala de grises, desde el negro en el origen hasta blanco en el punto (1, 1, 1).}
+    \label{mt:rgbcube}
+\end{figure}
+
+\section{Imagen Hiperespectral}
+Las imágenes hiperespectrales constituyen una técnica avanzada que integra la fotografía digital convencional con la espectroscopia, lo que permite la adquisición simultánea de información espectral y espacial de un objeto\cite{park_hyperspectral_2015, wang_review_2021, chu_classifying_2020}. Entre sus características fundamentales destacan las siguientes:
+
+\subsection{Hipercubo}
+Las imágenes hiperespectrales capturan datos a lo largo de cientos de bandas espectrales contiguas y estrechas (que abarcan el espectro visible, el infrarrojo cercano y el infrarrojo térmico) para cada píxel de la imagen\cite{park_hyperspectral_2015}. Esto genera una estructura tridimensional de datos denominada hipercubo o cubo de datos, la cual comprende dos dimensiones espaciales y una dimensión espectral, la imagen \ref{mt:hypercube} es una representación de la estructura de datos del cubo hiperespectral.
+
+\subsection{Captura de información dual}
+Dado que se registra el espectro completo para cada píxel y se genera una imagen por cada longitud de onda, la imaginería hiperespectral adquiere simultáneamente las propiedades físico-geométricas del objeto (tales como morfología, dimensión, color y textura) así como sus propiedades químico-moleculares (incluyendo contenido de agua, lípidos, proteínas y otros compuestos con enlaces de hidrógeno) \cite{park_hyperspectral_2015}.
+
+\subsection{Resolución y sensibilidad espectral}
+Esta técnica destaca por su elevada resolución espacial y espectral, lo que facilita la detección de variaciones sutiles en la composición química y la textura de los materiales. Dichas capacidades se logran mediante la medición de la firma espectral característica de cada objeto, evaluando de forma precisa los patrones de absorción, reflectancia o emisión de radiación electromagnética a lo largo de diversas longitudes de onda \cite{park_hyperspectral_2015}.  
+
+Debido a su habilidad para realizar inspecciones altamente detalladas y no invasivas, las imágenes hiperespectrales son utilizadas ampliamente para inspecciones de calidad y seguridad en agricultura y procesamiento de alimentos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{fig_hypercube_with_axis.jpg}
+    \caption{Representación gráfica de un cubo hiperespectral.}
+    \label{mt:hypercube}
+\end{figure}
+
+\section{El fenómeno de Hughes}
+El fenómeno de Hughes, también denominado «maldición de la dimensionalidad», constituye un problema estadístico recurrente en el que el incremento en el número de variables o características dentro de un conjunto de datos no repercute necesariamente en una mayor precisión de clasificación. En presencia de un tamaño de muestra de entrenamiento constante, la incorporación progresiva de dimensiones espectrales puede conducir a la degradación del rendimiento predictivo del modelo.  
+Esta problemática resulta de particular relevancia en el ámbito del procesamiento de imágenes hiperespectrales, dado que los sensores adquieren datos a lo largo de cientos de bandas espectrales contiguas\cite{hughes_mean_1968, sawant_survey_2020}. Si bien dicha resolución facilita la discriminación precisa entre clases y superficies complejas, de forma simultánea introduce diversos desafíos metodológicos y computacionales:
+
 \begin{itemize}
-    \item \textbf{Algoritmos Genéticos (GA):} Son técnicas de optimización bioinspiradas en la evolución natural \cite{eiben_introduction_2015}. Codifican soluciones candidatas como vectores y aplican operadores evolutivos de selección, cruce y mutación a lo largo de sucesivas generaciones para evitar convergencias prematuras y favorecer la exploración global \cite{deb_multi-objective_2001, eiben_introduction_2015}.
-    \item \textbf{Optimización por Enjambre de Partículas (PSO):} Es una metaheurística estocástica inspirada en el comportamiento colectivo de las bandadas de aves \cite{eiben_introduction_2015}. Modela a la población como partículas en un espacio n-dimensional, donde la trayectoria de cada partícula es gobernada por una velocidad actualizada mediante una suma ponderada de componentes de inercia, cognitivos y sociales \cite{eiben_introduction_2015, ratnaweera_self-organizing_2004}.
+    \item Redundancia y ruido en los datos: La elevada dimensionalidad inherente a la información hiperespectral suele derivar en una alta correlación entre bandas, así como en la presencia de variables irrelevantes y ruidosas.
+    \item Disminución de la capacidad discriminante: Cuando el número de características supera significativamente al de las muestras de entrenamiento, los modelos experimentan dificultades de generalización, reduciendo paradójicamente la precisión del análisis.
+    \item Elevada carga computacional: La magnitud del volumen de datos incrementa sustancialmente la complejidad algorítmica, afectando negativamente la eficiencia del procesamiento y la velocidad de cálculo.
 \end{itemize}
 
-Finalmente, para evaluar la idoneidad de las características extraídas, se requiere un modelo de clasificación supervisada. La Máquina de Soporte Vectorial (SVM) se utiliza por su probada robustez en espacios de alta dimensionalidad y su eficacia con conjuntos de datos limitados \cite{nagasubramanian_hyperspectral_2018}.
+
+
+\section{Algoritmos Genéticos}
+Son técnicas de optimización bioinspiradas en la evolución natural \cite{eiben_introduction_2015}. Codifican soluciones candidatas como vectores y aplican operadores evolutivos de selección, cruce y mutación a lo largo de sucesivas generaciones para evitar convergencias prematuras y favorecer la exploración global \cite{deb_multi-objective_2001, eiben_introduction_2015}.
+
+\section{Optimización por Enjambre de Particulas}
+Es una metaheurística estocástica inspirada en el comportamiento colectivo de las bandadas de aves \cite{eiben_introduction_2015}. Modela a la población como partículas en un espacio n-dimensional, donde la trayectoria de cada partícula es gobernada por una velocidad actualizada mediante una suma ponderada de componentes de inercia, cognitivos y sociales \cite{eiben_introduction_2015, ratnaweera_self-organizing_2004}.
+
+\section{La Máquina de Soporte Vectorial}
+Relleno
